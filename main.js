@@ -11,8 +11,8 @@ var exporter = new ElectronPDF();
 try{if(require("electron-squirrel-startup")){return app.quit();}}catch{}
 function createWindow(){
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 335,
+    height: 578,
     webPreferences: {
       nodeIntegration: true
     },
