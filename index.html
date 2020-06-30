@@ -45,9 +45,8 @@
       </div>
     </section>
     <script type="text/javascript">
-    const Store = require("electron-store");
-    const ipcRenderer = require('electron').ipcRenderer;
-    const store = new Store();
+    const ipcRenderer = require("electron").ipcRenderer;
+    var store = require("./store");
     var printMenu = document.getElementById("printMenu");
     var newspaperInput = document.getElementById("newspaper");
     var paperInput = document.getElementById("paper");

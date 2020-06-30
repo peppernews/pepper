@@ -1,14 +1,13 @@
 const fs = require("fs");
 const path = require("path");
 const {app, BrowserWindow, ipcMain} = require("electron");
-const Store = require("electron-store");
+var store = require("./store");
 const fetch = require("node-fetch");
 var unfluff = require("unfluff");
 var ElectronPDF = require("electron-pdf");
 var schedule = require("node-schedule");
 const printer = require("pdf-to-printer");
 var exporter = new ElectronPDF();
-const store = new Store();
 if(require("electron-squirrel-startup")){return app.quit();}
 function createWindow(){
   const mainWindow = new BrowserWindow({
