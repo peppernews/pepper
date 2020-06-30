@@ -11,8 +11,8 @@ var exporter = new ElectronPDF();
 try{if(require("electron-squirrel-startup")){return app.quit();}}catch{}
 function createWindow(){
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 335,
+    height: 578,
     webPreferences: {
       nodeIntegration: true
     },
@@ -26,6 +26,7 @@ app.on("activate", function(){
     createWindow();
   }
 });
+app.on("window-all-closed", function(){});
 function printNewspaper(toPrint){
   if(store.get("newspaper")){
     if(store.get("newspaper") == "nyt"){
