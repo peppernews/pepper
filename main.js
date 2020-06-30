@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const {app, BrowserWindow, ipcMain} = require("electron");
-const store = require("./store");
+var store = require("./store");
 const fetch = require("node-fetch");
 var unfluff = require("unfluff");
 var ElectronPDF = require("electron-pdf");
