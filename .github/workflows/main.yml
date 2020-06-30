@@ -5,7 +5,10 @@ on:
 jobs:
   publish:
     name: Publish to releases
-    runs-on: macos-latest
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2.3.1
