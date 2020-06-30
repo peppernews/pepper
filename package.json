@@ -27,7 +27,8 @@
     "unfluff": "^3.2.0",
     "electron-pdf": "^7.0.0",
     "pdf-to-printer": "^1.4.0",
-    "update-electron-app": "^1.5.0"
+    "update-electron-app": "^1.5.0",
+    "macos-alias": "^0.2.11"
   },
   "config": {
     "forge": {

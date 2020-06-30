@@ -2,12 +2,9 @@ on:
   push:
     branches:
       - release
-  pull_request:
-    branches:
-      - release
 jobs:
   publish:
-    name: build publish to releases
+    name: Publish to releases
     runs-on: macos-latest
     steps:
       - name: Checkout repository
