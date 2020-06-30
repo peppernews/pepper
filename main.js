@@ -8,7 +8,7 @@ var ElectronPDF = require("electron-pdf");
 var schedule = require("node-schedule");
 const printer = require("pdf-to-printer");
 var exporter = new ElectronPDF();
-if(require("electron-squirrel-startup")){return app.quit();}
+try{if(require("electron-squirrel-startup")){return app.quit();}}catch{}
 function createWindow(){
   const mainWindow = new BrowserWindow({
     width: 800,
