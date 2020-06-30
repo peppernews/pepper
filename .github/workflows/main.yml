@@ -21,7 +21,8 @@ jobs:
         run: |
           brew cask install xquartz
           brew cask install wine-stable
-          brew install --force mono
+          sudo rm /usr/local/share/man/man1/al.1
+          brew install mono
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
