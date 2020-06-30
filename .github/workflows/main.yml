@@ -7,15 +7,13 @@ on:
       - release
 jobs:
   publish:
-    name: build publish to releases
+    name: Publish to releases
     runs-on: macos-latest
     steps:
-      - name: Setup Node
-        uses: actions/setup-node@v1
+      - name: Electron Forge Action
+        uses: yinxulai/actions-electron-forge@0.05
         with:
-          node-version: '10.x'
-      - name: NPM install and publish
-        run: |
-          GITHUB_TOKEN='${{secrets.GITHUB_TOKEN}}'
-          npm install
-          npm run publish
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          package_root: .
+          script_name: publish
+          release: false
