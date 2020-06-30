@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+    <title>Pepper</title>
+    <link rel="icon" type="image/png" href="icon.png"/>
+    <link rel="shortcut icon" type="image/png" href="icon.png"/>
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
+  </head>
+  <body>
+    <section class="hero is-fullheight">
+      <div class="hero-body">
+        <div class="container has-text-centered" style="font-family:monospace!important;">
+          <img src="icon.png" style="display:inline-block;width:100px;height:100px;"/>
+          <h1 class="title">pepper</h1>
+          <p>Your newspaper delivered to you every day, via your printer.</p>
+          <br/>
+          <div class="field">
+            <div class="control">
+              <div class="select is-medium is-danger">
+                <select id="newspaper" style="font-family:monospace!important;">
+                  <option value="none">No newspaper</option>
+                  <option value="nyt">The New York Times</option>
+                  <option value="g">The Guardian</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <div class="select">
+                <select id="paper" style="font-family:monospace!important;">
+                  <option value="A4">A4</option>
+                  <option value="Letter">Letter</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div id="printMenu" style="display:none;">
+            <br/><button class="button is-danger is-light" onclick="printNewspaper()">Print now</button>&nbsp;<button class="button" onclick="showNewspaper()">Show newspaper</button>
+            <small><br/>Prints are always scheduled for 6:30 AM, but you can trigger a print now too.</small>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script type="text/javascript">
+    const Store = require("electron-store");
+    const ipcRenderer = require('electron').ipcRenderer;
+    const store = new Store();
+    var printMenu = document.getElementById("printMenu");
+    var newspaperInput = document.getElementById("newspaper");
+    var paperInput = document.getElementById("paper");
+    if(store.get("newspaper")){
+      newspaperInput.value = store.get("newspaper");
+      if(newspaperInput.value != "none"){
+        printMenu.style.display = "inline-block";
+      }
+    }else{
+      store.set("newspaper", "none");
+    }
+    newspaperInput.addEventListener("change", function(){
+      store.set("newspaper", paperInput.value);
+      if(newspaperInput.value != "none"){
+        printMenu.style.display = "inline-block";
+      }else{
+        printMenu.style.display = "none";
+      }
+    });
+    if(store.get("paper")){
+      paperInput.value = store.get("paper");
+    }else{
+      store.set("paper", "A4");
+    }
+    paperInput.addEventListener("change", function(){
+      store.set("paper", paperInput.value);
+    });
+    function printNewspaper(){ipcRenderer.send("printNewspaper");}
+    function showNewspaper(){ipcRenderer.send("showNewspaper");}
+    ipcRenderer.on("showOff", function(event){window.open("newspaper.pdf");});
+    </script>
+  </body>
+</html>
