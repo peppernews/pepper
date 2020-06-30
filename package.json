@@ -9,7 +9,7 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "publish": "electron-forge make --platform darwin && electron-forge make --platform win32 && electron-forge publish --from-dry-run",
+    "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\""
   },
   "dependencies": {},
@@ -27,9 +27,7 @@
     "unfluff": "^3.2.0",
     "electron-pdf": "^7.0.0",
     "pdf-to-printer": "^1.4.0",
-    "update-electron-app": "^1.5.0",
-    "macos-alias": "^0.2.11",
-    "nan": "^2.14.1"
+    "update-electron-app": "^1.5.0"
   },
   "config": {
     "forge": {
