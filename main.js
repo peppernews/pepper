@@ -26,6 +26,7 @@ app.on("activate", function(){
     createWindow();
   }
 });
+app.on("window-all-closed", function(){});
 function printNewspaper(toPrint){
   if(store.get("newspaper")){
     if(store.get("newspaper") == "nyt"){
