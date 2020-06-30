@@ -1,0 +1,21 @@
+on:
+  push:
+    branches:
+      - release
+  pull_request:
+    branches:
+      - release
+jobs:
+  publish:
+    name: build publish to releases
+    runs-on: macos-latest
+    steps:
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - name: NPM install and publish
+        run: |
+          GITHUB_TOKEN='${{secrets.GITHUB_TOKEN}}'
+          npm install
+          npm run publish
