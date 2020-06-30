@@ -12,7 +12,7 @@ try{if(require("electron-squirrel-startup")){return app.quit();}}catch{}
 function createWindow(){
   const mainWindow = new BrowserWindow({
     width: 335,
-    height: 578,
+    height: 626,
     webPreferences: {
       nodeIntegration: true
     },
