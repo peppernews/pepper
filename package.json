@@ -9,7 +9,7 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "publish": "electron-forge publish",
+    "publish": "electron-forge make --platform dmg && electron-forge make --platform squirrel && electron-forge publish --from-dry-run",
     "lint": "echo \"No linting configured\""
   },
   "dependencies": {},
