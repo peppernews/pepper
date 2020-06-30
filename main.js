@@ -94,7 +94,7 @@ function printNewspaper(toPrint){
         exporter.createJob(htmlData, "newspaper.pdf", {pageSize: store.get("paper")}, {}).then(function(job){
           job.on('job-complete', function(r){
             if(toPrint){
-              printer.print("newspaper.pdf");
+              printer.print("newspaper.pdf", {unix: `-o media=${store.get("paper")} -o sides=two-sided-long-edge`, win32: `-print-settings "duplexlong,paper=${store.get("paper")}"`});
             }else{
               ipcMain.send("showOff");
             }
