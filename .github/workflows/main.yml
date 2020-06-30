@@ -19,6 +19,7 @@ jobs:
           sudo xcodebuild -license accept
       - name: Setup Wine and Mono
         run: |
+          brew cask install xquartz
           brew cask install wine-stable
           brew install mono
       - name: Setup Node
