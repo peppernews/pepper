@@ -4,6 +4,10 @@
   "description": "A fresh take on newspapers.",
   "main": "./main.js",
   "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/peppernews/pepper.git"
+  },
   "author": "Cedric Kim <hi@cedric.kim> (https://cedric.kim)",
   "scripts": {
     "start": "electron-forge start",
