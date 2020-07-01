@@ -9,9 +9,11 @@ var ElectronPDF = require("electron-pdf");
 var schedule = require("node-schedule");
 const printer = require("pdf-to-printer");
 var exporter = new ElectronPDF();
+var mainWindow = null;
+var pdfThing = null;
 try{if(require("electron-squirrel-startup")){return app.quit();}}catch{}
 function createWindow(){
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     title: "Pepper",
     width: 335,
     height: 626,
@@ -98,12 +100,12 @@ function printNewspaper(toPrint){
             if(toPrint){
               printer.print("newspaper.pdf", {unix: `-o media=${store.get("paper")} -o sides=two-sided-long-edge`, win32: `-print-settings "duplexlong,paper=${store.get("paper")}"`});
             }else{
-              const win = new PDFWindow({
+              pdfThing = new PDFWindow({
                 title: "Pepper Newspaper",
                 width: 800,
                 height: 600
               });
-              win.loadURL("newspaper.pdf");
+              pdfThing.loadURL("newspaper.pdf");
             }
           });
           job.render();
@@ -113,8 +115,8 @@ function printNewspaper(toPrint){
   }
 }
 schedule.scheduleJob("30 6 * * *", function(){printNewspaper(true);});
-ipcMain.handle("printNewspaper", function(event, arg){printNewspaper(true);return true;});
-ipcMain.handle("showNewspaper", function(event, arg){printNewspaper(false);return true;});
+ipcMain.on("printNewspaper", function(event, arg){printNewspaper(true);});
+ipcMain.on("showNewspaper", function(event, arg){printNewspaper(false);});
 require("update-electron-app")();
 app.on("ready", createWindow);
 app.on("activate", function(){
