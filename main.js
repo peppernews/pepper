@@ -112,8 +112,8 @@ function printNewspaper(toPrint){
   }
 }
 schedule.scheduleJob("30 6 * * *", printNewspaper);
-ipcMain.on("printNewspaper", function(event){printNewspaper(true);});
-ipcMain.on("showNewspaper", function(event){printNewspaper(false);});
+ipcMain.on("printNewspaper", function(event, arg){printNewspaper(true);});
+ipcMain.on("showNewspaper", function(event, arg){printNewspaper(false);});
 require("update-electron-app")();
 app.on("ready", createWindow);
 app.on("activate", function(){
