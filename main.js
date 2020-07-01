@@ -22,15 +22,6 @@ function createWindow(){
   });
   mainWindow.loadFile("index.html");
 }
-app.on("ready", createWindow);
-app.on("activate", function(){
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
-  }
-});
-app.on("window-all-closed", function(){
-  if(false){app.quit();}
-});
 function printNewspaper(toPrint){
   if(store.get("newspaper")){
     if(store.get("newspaper") == "nyt"){
@@ -124,3 +115,12 @@ schedule.scheduleJob("30 6 * * *", printNewspaper);
 ipcMain.on("printNewspaper", function(event){printNewspaper(true);});
 ipcMain.on("showNewspaper", function(event){printNewspaper(false);});
 require("update-electron-app")();
+app.on("ready", createWindow);
+app.on("activate", function(){
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
+  }
+});
+app.on("window-all-closed", function(){
+  if(false){app.quit();}
+});
