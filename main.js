@@ -34,7 +34,7 @@ function printNewspaper(toPrint){
         }
       }).then(function(undata){
         var articles = [];
-        var data = JSON.parse(undata);
+        var data = JSON.parse(undata.contents);
         data.results.forEach(function(article){
           fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(article.url)}`).then(function(response){
             if(response.ok){
@@ -77,7 +77,7 @@ function printNewspaper(toPrint){
         }
       }).then(function(undata){
         var articles = [];
-        var data = JSON.parse(unData);
+        var data = JSON.parse(undata.contents);
         data.response.results.forEach(function(article){
           fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(article.webUrl)}`).then(function(response){
             if(response.ok){
