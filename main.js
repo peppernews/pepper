@@ -112,11 +112,13 @@ function printNewspaper(toPrint){
     }
   }
 }
-schedule.scheduleJob("30 6 * * *", function(){printNewspaper(true);});
-ipcMain.on("printNewspaper", function(event, arg){printNewspaper(true);});
-ipcMain.on("showNewspaper", function(event, arg){printNewspaper(false);});
-require("update-electron-app")();
-app.on("ready", createWindow);
+app.on("ready", function(){
+  createWindow();
+  schedule.scheduleJob("30 6 * * *", function(){printNewspaper(true);});
+  ipcMain.on("printNewspaper", function(event, arg){printNewspaper(true);});
+  ipcMain.on("showNewspaper", function(event, arg){printNewspaper(false);});
+  require("update-electron-app")();
+});
 app.on("activate", function(){
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
