@@ -32,8 +32,9 @@ function printNewspaper(toPrint){
         if(response.ok){
           return response.json();
         }
-      }).then(function(data){
+      }).then(function(undata){
         var articles = [];
+        var data = JSON.parse(undata);
         data.results.forEach(function(article){
           fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(article.url)}`).then(function(response){
             if(response.ok){
@@ -74,8 +75,9 @@ function printNewspaper(toPrint){
         if(response.ok){
           return response.json();
         }
-      }).then(function(data){
+      }).then(function(undata){
         var articles = [];
+        var data = JSON.parse(unData);
         data.response.results.forEach(function(article){
           fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(article.webUrl)}`).then(function(response){
             if(response.ok){
