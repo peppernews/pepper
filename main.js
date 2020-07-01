@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const {app, BrowserWindow, ipcMain} = require("electron");
+const PDFWindow = require("electron-pdf-window");
 var store = require("./store");
 const fetch = require("node-fetch");
 var unfluff = require("unfluff");
@@ -27,8 +28,10 @@ app.on("activate", function(){
     createWindow();
   }
 });
-app.on("window-all-closed", function(){});
-function printNewspaper(toPrint){
+app.on("window-all-closed", function(){
+  if(false){app.quit();}
+});
+async function printNewspaper(toPrint){
   if(store.get("newspaper")){
     if(store.get("newspaper") == "nyt"){
       fetch("https://api.nytimes.com/svc/topstories/v2/home.json?api-key=TZI2Jcb89nm3dAARQ5FlhGXvU8a86mnB").then(function(response){
@@ -61,7 +64,12 @@ function printNewspaper(toPrint){
             if(toPrint){
               printer.print("newspaper.pdf");
             }else{
-              ipcMain.send("showOff");
+              const win = new PDFWindow({
+                title: "Pepper Newspaper",
+                width: 800,
+                height: 600
+              });
+              win.loadURL("newspaper.pdf");
             }
           });
           job.render();
@@ -98,7 +106,12 @@ function printNewspaper(toPrint){
             if(toPrint){
               printer.print("newspaper.pdf", {unix: `-o media=${store.get("paper")} -o sides=two-sided-long-edge`, win32: `-print-settings "duplexlong,paper=${store.get("paper")}"`});
             }else{
-              ipcMain.send("showOff");
+              const win = new PDFWindow({
+                title: "Pepper Newspaper",
+                width: 800,
+                height: 600
+              });
+              win.loadURL("newspaper.pdf");
             }
           });
           job.render();
