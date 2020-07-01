@@ -75,8 +75,8 @@
     paperInput.addEventListener("change", function(){
       store.set("paper", paperInput.value);
     });
-    function printNewspaper(){ipcRenderer.invoke("printNewspaper", null);}
-    function showNewspaper(){ipcRenderer.invoke("showNewspaper", null);}
+    function printNewspaper(){ipcRenderer.send("printNewspaper", null);}
+    function showNewspaper(){ipcRenderer.send("showNewspaper", null);}
     </script>
   </body>
 </html>
