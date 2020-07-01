@@ -28,7 +28,7 @@ function createWindow(){
 function printNewspaper(toPrint){
   if(store.get("newspaper")){
     if(store.get("newspaper") == "nyt"){
-      fetch("https://api.nytimes.com/svc/topstories/v2/home.json?api-key=TZI2Jcb89nm3dAARQ5FlhGXvU8a86mnB").then(function(response){
+      fetch(`https://api.allorigins.win/get?url=${encodeURIComponent("https://api.nytimes.com/svc/topstories/v2/home.json?api-key=TZI2Jcb89nm3dAARQ5FlhGXvU8a86mnB")}`).then(function(response){
         if(response.ok){
           return response.json();
         }
@@ -70,14 +70,14 @@ function printNewspaper(toPrint){
         });
       });
     }else if(store.get("newspaper") == "g"){
-      fetch("https://content.guardianapis.com/search?api-key=4990266d-ade7-452b-af22-42208dc7a502").then(function(response){
+      fetch(`https://api.allorigins.win/get?url=${encodeURIComponent("https://content.guardianapis.com/search?api-key=4990266d-ade7-452b-af22-42208dc7a502")}`).then(function(response){
         if(response.ok){
           return response.json();
         }
       }).then(function(data){
         var articles = [];
         data.response.results.forEach(function(article){
-          fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(webUrl)}`).then(function(response){
+          fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(article.webUrl)}`).then(function(response){
             if(response.ok){
               return response.json();
             }
