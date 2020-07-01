@@ -31,7 +31,7 @@ app.on("activate", function(){
 app.on("window-all-closed", function(){
   if(false){app.quit();}
 });
-async function printNewspaper(toPrint){
+function printNewspaper(toPrint){
   if(store.get("newspaper")){
     if(store.get("newspaper") == "nyt"){
       fetch("https://api.nytimes.com/svc/topstories/v2/home.json?api-key=TZI2Jcb89nm3dAARQ5FlhGXvU8a86mnB").then(function(response){
