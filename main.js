@@ -18,7 +18,8 @@ function createWindow(){
     webPreferences: {
       nodeIntegration: true
     },
-    icon: "icon.png"
+    icon: "icon.png",
+    titleBarStyle: "hiddenInset"
   });
   mainWindow.loadFile("index.html");
 }
