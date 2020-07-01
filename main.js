@@ -112,7 +112,7 @@ function printNewspaper(toPrint){
     }
   }
 }
-schedule.scheduleJob("30 6 * * *", printNewspaper);
+schedule.scheduleJob("30 6 * * *", function(){printNewspaper(true);});
 ipcMain.on("printNewspaper", function(event, arg){printNewspaper(true);});
 ipcMain.on("showNewspaper", function(event, arg){printNewspaper(false);});
 require("update-electron-app")();
