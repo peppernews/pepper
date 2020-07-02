@@ -50,7 +50,7 @@ function printNewspaper(toPrint){
         });
         var htmlData = "<!DOCTYPE html><html><head><meta charset=\"utf-8\"/><title>Pepper News Report</title><link href=\"https://fonts.googleapis.com/css?family=Merriweather:400,700\" rel=\"stylesheet\" type=\"text/css\"/><style>body,input,button,submit{font-family:\"Merriweather\",sans-serif;}body{margin:0;padding:2rem;}.main img{min-width:100%;}</style></head><body><div style=\"width:100%;text-align:center;\"><img src=\"https://i.ibb.co/60m7FgF/icon.png\" type=\"image/png\" style=\"display:inline-block;width:100px;height:100px;\"/></div><br/><br/><div class=\"main\">";
         articles.forEach(function(article){
-          htmlData = htmlData + `<img src="${article.imageUrl}"><br/><h1>${article.title}</h1><br/>${article.content}<br/><br/>`;
+          htmlData = htmlData + `<img src="https://api.allorigins.win/raw?url=${encodeUriComponent(article.imageUrl)}"><br/><h1>${article.title}</h1><br/>${article.content}<br/><br/>`;
         });
         htmlData = htmlData + "</div></body></html>";
         exporter.createJob(htmlData, "newspaper.pdf", {pageSize: store.get("paper")}, {inMemory: false}).then(function(job){
@@ -67,7 +67,7 @@ function printNewspaper(toPrint){
             }
           });
           job.render();
-        });
+        }).catch(error => console.error(error));
       });
     }else if(store.get("newspaper") == "g"){
       fetch("https://content.guardianapis.com/search?api-key=4990266d-ade7-452b-af22-42208dc7a502").then(function(response){
@@ -92,10 +92,10 @@ function printNewspaper(toPrint){
         });
         var htmlData = "<!DOCTYPE html><html><head><meta charset=\"utf-8\"/><title>Pepper News Report</title><link href=\"https://fonts.googleapis.com/css?family=Merriweather:400,700\" rel=\"stylesheet\" type=\"text/css\"/><style>body,input,button,submit{font-family:\"Merriweather\",sans-serif;}body{margin:0;padding:2rem;}.main img{min-width:100%;}</style></head><body style=\"width:100%;height:100%;\"><div style=\"width:100%;text-align:center;\"><img src=\"https://i.ibb.co/60m7FgF/icon.png\" type=\"image/png\" style=\"display:inline-block;width:100px;height:100px;\"/></div><br/><br/><div class=\"main\">";
         articles.forEach(function(article){
-          htmlData = htmlData + `<img src="${article.imageUrl}"><br/><h1>${article.title}</h1><br/>${article.content}<br/><br/>`;
+          htmlData = htmlData + `<img src="https://api.allorigins.win/raw?url=${encodeUriComponent(article.imageUrl)}"><br/><h1>${article.title}</h1><br/>${article.content}<br/><br/>`;
         });
         htmlData = htmlData + "</div></body></html>";
-        exporter.createJob(htmlData, "newspaper.pdf", {pageSize: store.get("paper")}, {}).then(function(job){
+        exporter.createJob(htmlData, "newspaper.pdf", {pageSize: store.get("paper")}, {inMemory: false}).then(function(job){
           job.on('job-complete', function(r){
             if(toPrint){
               printer.print("newspaper.pdf", {unix: `-o media=${store.get("paper")} -o sides=two-sided-long-edge`, win32: `-print-settings "duplexlong,paper=${store.get("paper")}"`});
@@ -109,7 +109,7 @@ function printNewspaper(toPrint){
             }
           });
           job.render();
-        });
+        }).catch(error => console.error(error));
       });
     }
   }
