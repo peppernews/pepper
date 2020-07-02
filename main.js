@@ -53,7 +53,7 @@ function printNewspaper(toPrint){
           htmlData = htmlData + `<img src="${article.imageUrl}"><br/><h1>${article.title}</h1><br/>${article.content}<br/><br/>`;
         });
         htmlData = htmlData + "</div></body></html>";
-        exporter.createJob(htmlData, "newspaper.pdf", {pageSize: store.get("paper")}, {}).then(function(job){
+        exporter.createJob(htmlData, "newspaper.pdf", {pageSize: store.get("paper")}, {inMemory: false}).then(function(job){
           job.on('job-complete', function(r){
             if(toPrint){
               printer.print("newspaper.pdf");
