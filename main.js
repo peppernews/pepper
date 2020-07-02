@@ -28,17 +28,16 @@ function createWindow(){
 function printNewspaper(toPrint){
   if(store.get("newspaper")){
     if(store.get("newspaper") == "nyt"){
-      fetch(`https://api.allorigins.win/get?url=${encodeURIComponent("https://api.nytimes.com/svc/topstories/v2/home.json?api-key=TZI2Jcb89nm3dAARQ5FlhGXvU8a86mnB")}`).then(function(response){
+      fetch("https://api.nytimes.com/svc/topstories/v2/home.json?api-key=TZI2Jcb89nm3dAARQ5FlhGXvU8a86mnB").then(function(response){
         if(response.ok){
           return response.json();
         }
-      }).then(function(undata){
+      }).then(function(data){
         var articles = [];
-        var data = JSON.parse(undata.contents);
         data.results.forEach(function(article){
-          fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(article.url)}`).then(function(response){
+          fetch(article.url).then(function(response){
             if(response.ok){
-              return response.json();
+              return response.text();
             }
           }).then(function(data){
             var parsedData = unfluff(data);
@@ -71,17 +70,16 @@ function printNewspaper(toPrint){
         });
       });
     }else if(store.get("newspaper") == "g"){
-      fetch(`https://api.allorigins.win/get?url=${encodeURIComponent("https://content.guardianapis.com/search?api-key=4990266d-ade7-452b-af22-42208dc7a502")}`).then(function(response){
+      fetch("https://content.guardianapis.com/search?api-key=4990266d-ade7-452b-af22-42208dc7a502").then(function(response){
         if(response.ok){
           return response.json();
         }
-      }).then(function(undata){
+      }).then(function(data){
         var articles = [];
-        var data = JSON.parse(undata.contents);
         data.response.results.forEach(function(article){
-          fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(article.webUrl)}`).then(function(response){
+          fetch(article.webUrl).then(function(response){
             if(response.ok){
-              return response.json();
+              return response.text();
             }
           }).then(function(data){
             var parsedData = unfluff(data);
